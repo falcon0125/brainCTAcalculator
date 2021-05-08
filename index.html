@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,91 +10,92 @@
 
 <style>
     * {
-  font-family: Calibri;
-}
+        font-family: Calibri;
+    }
 
-span {
-  display: inline-block;
-  font-size: 20pt;
-  margin: 5pt;
-}
+    span {
+        display: inline-block;
+        font-size: 20pt;
+        margin: 5pt;
+    }
 
-.result {
-  color: red;
-  padding-left: 2pt;
-}
+    .result {
+        color: red;
+        padding-left: 2pt;
+    }
 
-label,
-input {
-  font-size: 20pt;
-  margin: 5pt;
-}
+    label,
+    input {
+        font-size: 20pt;
+        margin: 5pt;
+    }
 
-input[type=number]{
-  width: 50pt;
-}
+    input[type=number] {
+        width: 50pt;
+    }
 
-span.warning {
-  color: red;
-  font-size: 10pt;
-}
+    span.warning {
+        color: red;
+        font-size: 10pt;
+    }
 
-.description {
-  font-weight: bold;
-}
-
+    .description {
+        font-weight: bold;
+    }
 </style>
+
 <body>
     <div>
         <h1>Multiphase Brain CTA calculator</h1>
         <label>CTA contrast volume</label>
         <input type="number" id="contrast_volume" step="5" value="60" />
-        <br/>
+        <br />
         <label>CTA contrast flow rate</label><span class="warning">(大於等於3)</span>
         <input type="number" id="contrast_flow" step="0.1" value="4" />
-        <br/>
+        <br />
         <label>Scan time 1</label>
         <input type="number" id="ST1" step="1" value="8" />
-        <br/>
+        <br />
         <label>Scan time 2</label>
         <input type="number" id="ST2" step="1" value="4" />
-      </div>
-      <input id="confirm" type="button" value="confirm" />
-      <div id=result>
+    </div>
+    <input id="confirm" type="button" value="confirm" />
+    <div id=result>
         <span class='description'>CTA - phase 1(Arch->頭頂)</span>
         <span class='rh'>PTD1=</span><span class='result' id="PTD1"></span>
-        <br/>
+        <br />
         <span class='description'>CTA - phase 2(頭頂->顱底)</span>
         <span class='rh'>PTD2=</span><span class='result' id="PTD2"></span>
-        <br/>
+        <br />
         <span class='description'>CTA - phase 3(顱底->頭頂)</span>
         <span class='rh'>PTD3=</span><span class='result' id="PTD3"></span>
-        <br/>
-      
-      </div>
+        <br />
 
-      
-      
+    </div>
+
+
+
 </body>
 <script>
-    document.querySelector("#confirm").addEventListener('click', function() {
-      dt = parseFloat(document.querySelector("#contrast_volume").value) / parseFloat(document.querySelector("#contrast_flow").value);
-      st1 = parseFloat(document.querySelector("#ST1").value)
-      st2 = parseFloat(document.querySelector("#ST2").value)
-      ptd1 = (dt - st1) * 0.6
-    
-      if (ptd1 < 3) {
-        ptd1 = 3
-      }
-      ptd2 = st1 + ptd1 + 4
-      ptd3 = st2 + ptd2 + 4
-    
-      //console.log(dt, ptd1, ptd2, ptd3);
-      document.querySelector("#PTD1").textContent = ptd1.toFixed(1)
-      document.querySelector("#PTD2").textContent = ptd2.toFixed(1)
-      document.querySelector("#PTD3").textContent = ptd3.toFixed(1)
-    
+    document.querySelector("#confirm").addEventListener('click', function () {
+        dt = parseFloat(document.querySelector("#contrast_volume").value) / parseFloat(document.querySelector("#contrast_flow").value);
+        st1 = parseFloat(document.querySelector("#ST1").value)
+        st2 = parseFloat(document.querySelector("#ST2").value)
+        ptd1 = (dt - st1) * 0.6
+
+        if (ptd1 < 3) {
+            ptd1 = 3
+        }
+        ptd2 = st1 + ptd1 + 4
+        ptd3 = st2 + ptd2 + 4
+
+        //console.log(dt, ptd1, ptd2, ptd3);
+        document.querySelector("#PTD1").textContent = ptd1.toFixed(1)
+        document.querySelector("#PTD2").textContent = ptd2.toFixed(1)
+        document.querySelector("#PTD3").textContent = ptd3.toFixed(1)
+
     });
-    
-    </script>
+
+</script>
+
 </html>
