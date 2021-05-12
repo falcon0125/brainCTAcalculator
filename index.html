@@ -6,6 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CTA calculator</title>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QMZGGT41GY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QMZGGT41GY');
+</script>
 </head>
 
 <style>
@@ -78,6 +87,7 @@
 </body>
 <script>
     document.querySelector("#confirm").addEventListener('click', function () {
+        flow =  parseFloat(document.querySelector("#contrast_flow").value);
         dt = parseFloat(document.querySelector("#contrast_volume").value) / parseFloat(document.querySelector("#contrast_flow").value);
         st1 = parseFloat(document.querySelector("#ST1").value)
         st2 = parseFloat(document.querySelector("#ST2").value)
@@ -94,6 +104,12 @@
         document.querySelector("#PTD2").textContent = ptd2.toFixed(1)
         document.querySelector("#PTD3").textContent = ptd3.toFixed(1)
 
+        
+        gtag('event', 'calculate', {
+        'event_category' : 'parameter',
+        'event_label' : 'flow',
+        'value': flow,
+        });
     });
 
 </script>
